@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Simple Gate (Client-only)</title>
+  <style>body{font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;margin:1.25rem} iframe{width:100%;height:600px;border:0}</style>
+</head>
+<body>
+<h1>Simple Gate (Client-only)</h1>
+<p>⚠️ For classroom demos only. Codes are visible in page source.</p>
+<input id="pw" type="password" placeholder="Enter code">
+<button id="ok">Open</button>
+<div id="msg"></div>
+<div id="content" style="display:none;">
+  <iframe src="story1.html" title="Story activity"></iframe>
+</div>
+<script>
+const ALLOWED = ["alpha1","beta2","charlie3"]; // not secure
+document.getElementById('ok').onclick = () => {
+  const v = document.getElementById('pw').value.trim();
+  if(ALLOWED.includes(v)){
+    document.getElementById('content').style.display='block';
+  }else{
+    document.getElementById('msg').textContent='Invalid code';
+  }
+}
+</script>
+</body>
+</html>
