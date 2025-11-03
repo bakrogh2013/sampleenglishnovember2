@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Story: At the Bakery (A1)</title>
+  <meta name="description" content="A1 ESL story with audio and comprehension questions.">
+  <style>
+    :root{ --maxw: 860px; }
+    body{ font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; margin: 1.25rem; color:#111; background:#fafafa; }
+    .container{ max-width: var(--maxw); margin: 0 auto; }
+    h1,h2{ line-height: 1.25; }
+    .card{ border:1px solid #e5e7eb; border-radius: 12px; padding: 1rem 1.25rem; background:#fff; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+    .muted{ color:#555; font-size:.95rem; }
+    .row{ display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; }
+    button.play{ padding:.5rem .8rem; border:1px solid #374151; background:#fff; border-radius:8px; cursor:pointer; }
+    button.play[aria-pressed="true"]{ background:#f3f4f6; }
+    .audio-help{ font-size:.9rem; color:#4b5563; }
+    ol.q{ margin-left:1.2rem; }
+    .sep{ height:1px; background:#eee; margin:1rem 0; }
+    .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    footer{ color:#666; font-size:.9rem; text-align:center; margin-top:1rem; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header style="margin-bottom:1rem;">
+      <h1>At the Bakery</h1>
+      <p class="muted">Level: A1 • Reading + Questions • Audio included</p>
+    </header>
+
+    <section class="card" aria-labelledby="story-h">
+      <div class="row" style="justify-content: space-between;">
+        <h2 id="story-h" style="margin:0;">Story</h2>
+        <div class="row">
+          <button class="play" id="btnStory" aria-pressed="false" aria-controls="audioStory" aria-label="Play or pause story audio">▶︎ Play</button>
+        </div>
+      </div>
+      <div class="sep" role="presentation"></div>
+
+      <article>
+        <p>Maria works at a bakery. She starts work early in the morning. She makes bread, donuts, and pies. Many people come to buy food. The bakery is very busy on weekends. Maria talks to the customers. She puts the cookies in a box. She cleans the tables with paper towels. Maria feels happy when people smile. She likes her job at the bakery.</p>
+      </article>
+
+      <audio id="audioStory" preload="none">
+        <source src="../../assets/audio/a1story1.at-the-bakery.wav" type="audio/wav">
+        Your browser does not support the audio element. <a href="../../assets/audio/a1story1.at-the-bakery.wav">Download the audio</a>.
+      </audio>
+      <p class="audio-help">Tip: Click the Play button again to pause. You can replay as many times as you want.</p>
+    </section>
+
+    <section class="card" aria-labelledby="q-h" style="margin-top:1rem;">
+      <div class="row" style="justify-content: space-between;">
+        <h2 id="q-h" style="margin:0;">Questions</h2>
+        <div class="row">
+          <button class="play" id="btnQs" aria-pressed="false" aria-controls="audioQs" aria-label="Play or pause questions audio">▶︎ Play</button>
+        </div>
+      </div>
+      <div class="sep" role="presentation"></div>
+
+      <p class="muted">Instructions: Read the questions. You will answer these in Canvas, not on this page.</p>
+
+      <ol class="q">
+        <li>What does Maria make at the bakery? <span class="muted">(Example answer: She makes bread, donuts, and pies.)</span></li>
+        <li>Does Maria work in a bakery?</li>
+        <li>Is the bakery busy on weekends?</li>
+        <li>Does Maria clean the tables?</li>
+        <li>Does Maria feel sad at work?</li>
+        <li>What does Maria put in a box?</li>
+        <li>Choose one answer:<br>
+          a) This story is about baking food.<br>
+          b) This story is about going to school.<br>
+          c) This story is about washing clothes.
+        </li>
+      </ol>
+
+      <audio id="audioQs" preload="none">
+        <source src="../../assets/audio/a1story1.questions.at-the-bakery.wav" type="audio/wav">
+        Your browser does not support the audio element. <a href="../../assets/audio/a1story1.questions.at-the-bakery.wav">Download the audio</a>.
+      </audio>
+      <p class="audio-help">Tip: Click the Play button again to pause. You can replay as many times as you want.</p>
+    </section>
+
+    <footer>© BloomEd sample. Accessibility: headings, labels, and keyboard-friendly buttons.</footer>
+  </main>
+
+<script>
+(function(){
+  function wire(btnId, audioId){
+    const btn = document.getElementById(btnId);
+    const audio = document.getElementById(audioId);
+    if(!btn || !audio) return;
+
+    const update = () => {
+      const playing = !audio.paused && !audio.ended;
+      btn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+      btn.textContent = playing ? '⏸︎ Pause' : '▶︎ Play';
+    };
+
+    btn.addEventListener('click', () => {
+      if(audio.paused) audio.play(); else audio.pause();
+    });
+
+    audio.addEventListener('play', update);
+    audio.addEventListener('pause', update);
+    audio.addEventListener('ended', update);
+  }
+
+  wire('btnStory','audioStory');
+  wire('btnQs','audioQs');
+})();
+</script>
+</body>
+</html>
